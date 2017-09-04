@@ -10,11 +10,6 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False    # Gives a warning if not
 app.secret_key = '\xd0\xf9\x11\xd9\x84}\xb4\xd0J\x9dD\x10\xb9\t\xb6\x10%\xc3\xcbv\x9f\xfd\xbf\xac'
 db = SQLAlchemy(app)
 
-# Uncomment on first run to setup the database schema
-# A database named "Doctors_Reviews" must be accessible on port 5432 with
-# username "postgres" and password "hayesj3" must already exist
-# db.create_all()
-
 
 class Doctor(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -62,7 +57,7 @@ class CustomEncoder(json.JSONEncoder):
 
 @app.route('/')
 def index():
-    return redirect(url_for('doctors'))
+    return redirect(url_for('retrieve_doctors'))
 
 
 @app.route('/doctors', methods=['GET'])
@@ -131,3 +126,7 @@ def delete_review(doc_id, review_id):
 
 if __name__ == '__main__':
     app.run(debug=False)
+# Uncomment on first run to setup the database schema
+# A database named "Doctors_Reviews" must be accessible on port 5432 with
+# username "postgres" and password "hayesj3" must already exist
+    #db.create_all()
